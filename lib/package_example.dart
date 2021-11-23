@@ -1,19 +1,19 @@
 library package_example;
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
-class AlertBox {
+class CustomWidget {
   static Future showCustomAlertBox({
     required BuildContext context,
     required Widget willDisplayWidget,
   }) {
-    assert(context != null, "context is null!!");
-    assert(willDisplayWidget != null, "willDisplayWidget is null!!");
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(15)),
             ),
             content: Column(
@@ -22,7 +22,7 @@ class AlertBox {
                 willDisplayWidget,
                 MaterialButton(
                   color: Colors.white30,
-                  child: Text('close alert'),
+                  child: const Text('Close '),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -32,5 +32,39 @@ class AlertBox {
             elevation: 10,
           );
         });
+  }
+
+  Widget customTextField(BuildContext context) {
+    return Column(
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Enter a search term',
+            ),
+          ),
+        ),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                border: UnderlineInputBorder(),
+                labelText: 'Enter your username',
+              ),
+            ))
+      ],
+    );
+  }
+
+  Widget customText(BuildContext context, {TextStyle? style}) {
+    return Row(
+      children: [
+        Text(
+          'Hi',
+        )
+      ],
+    );
   }
 }
